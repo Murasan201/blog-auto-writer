@@ -138,6 +138,10 @@ blog-auto-writer/
 - OpenAI API key
 - Internet connection
 
+## Developer
+
+Created by [Murasan](https://murasan-net.com/)
+
 ## License
 
 MIT License - See LICENSE file for details.
