@@ -1,40 +1,40 @@
 # BlogAutoWriter
 
-OpenAI APIを活用してブログ記事を自動生成するCLIツールです。
+A CLI tool for automated blog post generation using OpenAI API.
 
-## 機能
+## Features
 
-- **タイトル入力**: CLIでタイトルを1行ずつ入力（空行またはENDで終了）
-- **カスタムプロンプト**: 文体、対象読者、記事長さを設定可能
-- **並列処理**: 最大10スレッドで効率的に記事生成
-- **Markdown出力**: `{YYYYMMDD}_{タイトルスラッグ}.md`形式で保存
-- **エラーハンドリング**: リトライ機能、レートリミット対応
-- **ログ管理**: 詳細なログ出力とJSON形式対応
+- **Title Input**: CLI-based title input line by line (terminate with empty line or 'END')
+- **Custom Prompts**: Configurable writing style, target audience, and article length
+- **Parallel Processing**: Efficient article generation with up to 10 threads
+- **Markdown Output**: Save as `{YYYYMMDD}_{title_slug}.md` format
+- **Error Handling**: Retry functionality and rate limit handling
+- **Logging**: Detailed logging with text and JSON format support
 
-## セットアップ
+## Setup
 
-### 1. 依存関係のインストール
+### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. 環境変数の設定
+### 2. Set Environment Variable
 
 ```bash
 export OPENAI_API_KEY="your-api-key-here"
 ```
 
-### 3. 設定ファイル（オプション）
+### 3. Configuration File (Optional)
 
-初回実行時に `config.json` が自動生成されます。必要に応じて設定をカスタマイズしてください。
+A `config.json` file will be automatically generated on first run. Customize settings as needed.
 
 ```json
 {
   "prompt_settings": {
-    "style": "丁寧で読みやすい文体",
-    "stance": "中立的",
-    "target_audience": "一般読者",
+    "style": "Polite and readable writing style",
+    "stance": "Neutral",
+    "target_audience": "General readers",
     "article_length": {
       "sections": 3,
       "words_per_section": 300
@@ -53,91 +53,91 @@ export OPENAI_API_KEY="your-api-key-here"
 }
 ```
 
-## 使用方法
+## Usage
 
-### 基本的な使用
+### Basic Usage
 
 ```bash
 python blog_auto_writer.py
 ```
 
-### オプション付き実行
+### Usage with Options
 
 ```bash
 python blog_auto_writer.py --config my_config.json --outdir ./my_articles --log-level DEBUG
 ```
 
-### 実行例
+### Example Session
 
 ```
 $ python blog_auto_writer.py
-=== BlogAutoWriter 設定 ===
-モデル: o4-mini
-文体: 丁寧で読みやすい文体
-対象読者: 一般読者
-出力先: output
+=== BlogAutoWriter Configuration ===
+Model: o4-mini
+Style: Polite and readable writing style
+Target Audience: General readers
+Output Directory: output
 ==============================
 
-記事タイトルを1行ずつ入力してください。
-空行または 'END' で入力を終了します。
+Enter article titles one per line.
+End input with empty line or 'END'.
 
-タイトル 1: Pythonの基礎を学ぼう
-  → 追加されました: Pythonの基礎を学ぼう
-タイトル 2: 機械学習入門
-  → 追加されました: 機械学習入門
-タイトル 3: END
+Title 1: Learn Python Basics
+  → Added: Learn Python Basics
+Title 2: Introduction to Machine Learning
+  → Added: Introduction to Machine Learning
+Title 3: END
 
-合計 2 件のタイトルが入力されました。
+Total 2 titles entered.
 
-=== 生成対象タイトル ===
- 1. Pythonの基礎を学ぼう
- 2. 機械学習入門
+=== Target Titles ===
+ 1. Learn Python Basics
+ 2. Introduction to Machine Learning
 ==============================
 
-記事生成を開始しますか？ (y/N): y
+Start article generation? (y/N): y
 
-=== 生成結果 ===
-✓ Pythonの基礎を学ぼう
-  → output/20250614_Pythonの基礎を学ぼう.md
-✓ 機械学習入門
-  → output/20250614_機械学習入門.md
+=== Generation Results ===
+✓ Learn Python Basics
+  → output/20250614_Learn_Python_Basics.md
+✓ Introduction to Machine Learning
+  → output/20250614_Introduction_to_Machine_Learning.md
 ==============================
-成功: 2 件, 失敗: 0 件
+Success: 2 articles, Failed: 0 articles
 
-生成されたファイルは output に保存されました。
+Generated files are saved to output directory.
 ```
 
-## コマンドラインオプション
+## Command Line Options
 
-- `--config`: 設定ファイルのパス（デフォルト: config.json）
-- `--outdir`: 出力ディレクトリ（デフォルト: ./output）
-- `--log-level`: ログレベル（DEBUG, INFO, WARNING, ERROR）
+- `--config`: Configuration file path (default: config.json)
+- `--outdir`: Output directory (default: ./output)
+- `--log-level`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
-## ファイル構成
+## File Structure
 
 ```
 blog-auto-writer/
-├── blog_auto_writer.py          # メインエントリーポイント
-├── requirements.txt             # Python 依存関係
-├── config.json                  # 設定ファイル（自動生成）
+├── blog_auto_writer.py          # Main entry point
+├── requirements.txt             # Python dependencies
+├── config.json                  # Configuration file (auto-generated)
 ├── src/
 │   ├── __init__.py
-│   ├── cli.py                   # CLI インターフェース
-│   ├── config.py                # 設定管理
-│   ├── generator.py             # 記事生成ロジック
-│   ├── openai_client.py         # OpenAI API クライアント
-│   ├── logger.py                # ログ設定
-│   └── utils.py                 # ユーティリティ関数
-├── output/                      # 生成されたMarkdownファイル
-└── logs/                        # ログファイル
+│   ├── cli.py                   # CLI interface
+│   ├── config.py                # Configuration management
+│   ├── generator.py             # Article generation logic
+│   ├── openai_client.py         # OpenAI API client
+│   ├── logger.py                # Logging setup
+│   └── utils.py                 # Utility functions
+├── output/                      # Generated markdown files
+└── logs/                        # Log files
 ```
 
-## 要件
+## Requirements
 
-- Python 3.8以上
-- OpenAI API キー
-- インターネット接続
+- Python 3.8+
+- OpenAI API key
+- Internet connection
 
-## ライセンス
+## License
 
-MIT License - 詳細は LICENSE ファイルを参照してください。
+MIT License - See LICENSE file for details.

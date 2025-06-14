@@ -14,6 +14,7 @@
 - Follow the specified CLI interface, file formats, and system architecture as documented
 - **OpenAI API Reference**: Use the implementation pattern from https://github.com/Murasan201/openai-text-generator/blob/main/generate_text.py as reference for API calls
 - Use `o4-mini` model and follow the established error handling and response processing patterns
+- **Documentation**: README.md and all documentation must be written in English
 
 ## Development Commands
 ```bash
